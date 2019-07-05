@@ -1,4 +1,4 @@
-package com.happyelements.fortuna.util;
+package com.eric;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

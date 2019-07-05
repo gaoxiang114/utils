@@ -1,12 +1,7 @@
-package com.happyelements.fortuna.util;
+package com.eric;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.collections.MapUtils;
-
-import com.happyelements.fortuna.lua.helper.ErrorHelper;
-import com.happyelements.rdcenter.commons.util.CollectionUtil;
 
 public class CacheSplit {
 
@@ -42,34 +37,35 @@ private static final int SPLIT_SIZE = 512 * 1024;
 		try {
 			for(int i=0; i<chunks; i++){
 				String subKey = mainPrefix + "_" + i;
-				CacheUtils.getInstance().setToDataCache(subKey, bytes[i], expireSec);
+//				CacheUtils.getInstance().setToDataCache(subKey, bytes[i], expireSec);
 			}
-			CacheUtils.getInstance().setToDataCache(mainPrefix, chunks, expireSec);
+//			CacheUtils.getInstance().setToDataCache(mainPrefix, chunks, expireSec);
 		} catch (Exception e) {
-			ErrorHelper.logError("", e);
+//			ErrorHelper.logError("", e);
 			for(int i=0; i<chunks; i++){
 				String subKey = mainPrefix + "_" + i;
-				CacheUtils.getInstance().deleteFromDataCache(subKey);
+//				CacheUtils.getInstance().deleteFromDataCache(subKey);
 			}
-			CacheUtils.getInstance().deleteFromDataCache(mainPrefix);
+//			CacheUtils.getInstance().deleteFromDataCache(mainPrefix);
 		}
 	}
 	
 	public static byte[] multiGet(String mainPrefix, int chunkNum){
-		List<String> subKeys = CollectionUtil.newArrayList();
-		for(int i=0; i<chunkNum; i++){
-			subKeys.add(mainPrefix + "_" + i);
-		}
-		byte[] o = new byte[0];
-		Map<String, Object> maps = CacheUtils.getInstance().getDataBulk(subKeys);
-		if(MapUtils.isEmpty(maps)){
-			return null;
-		}
-		for(String key : subKeys){
-			byte[] b = (byte[])maps.get(key);
-			o = union(o, b);
-		}
-		return o;
+//		List<String> subKeys = CollectionUtil.newArrayList();
+//		for(int i=0; i<chunkNum; i++){
+//			subKeys.add(mainPrefix + "_" + i);
+//		}
+//		byte[] o = new byte[0];
+//		Map<String, Object> maps = CacheUtils.getInstance().getDataBulk(subKeys);
+//		if(MapUtils.isEmpty(maps)){
+//			return null;
+//		}
+//		for(String key : subKeys){
+//			byte[] b = (byte[])maps.get(key);
+//			o = union(o, b);
+//		}
+//		return o;
+		return null;
 	}
 	
 	public static byte[] union(byte[] b1, byte[] b2){
